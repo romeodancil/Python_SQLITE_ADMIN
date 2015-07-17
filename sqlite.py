@@ -35,7 +35,7 @@ def getQueries():
 			query = input("Query> :")
 			if query != "":
 				selectQuery(query)
-		except sliteDb.OperationalError:
+		except liteDb.OperationalError:
 			print('Oops invalid query Please try it again')
 
 def selectQuery(query):
@@ -55,7 +55,6 @@ def selectQuery(query):
 		queryResult.add_row(eval(finalResult))
 	print('Total Number of Row(s) Affected: ', count)
 	print(queryResult)
-	getQueries()
 
 getTableList()
 getQueries()
