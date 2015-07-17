@@ -7,5 +7,3 @@ Mini SQLITE ADMIN Using Python
       For now it only execute a SELECT command there's no other than that for now.
 #### Requirements
      $ pip install PrettyTable
-#### Benefits
-      Well maybe it can help you check your sqlite database display number of columns and rows inside the table and execute query in your selected table and iterate data.
