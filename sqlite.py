@@ -30,7 +30,7 @@ def getTableList():
 	print(tableList)
 
 def getQueries():
-	while True:
+	while True: 
 		try:
 			query = input("Query> :")
 			if query != "":
