@@ -50,14 +50,9 @@ def selectQuery(query):
 	while rd < len(columnList):
 		result.append('i['+str(rd)+']')
 		rd+=1
-	#print(result)
-	for i in rows:				
-		finalResult =  ','.join(result)
-		x = len(result) 
-		if x < 2:
-			queryResult.add_row([eval(finalResult)]) 
-		else:
-			queryResult.add_row(eval(finalResult))
+	for i in rows:
+		finalResult =  ', '.join(result)
+		queryResult.add_row(eval(finalResult))
 	print('Total Number of Row(s) Affected: ', count)
 	print(queryResult)
 
