@@ -2,6 +2,8 @@
 
 import sqlite3 as liteDb
 import sys
+import platform
+import os
 
 from prettytable import PrettyTable # pip install PrettyTable
 
@@ -40,26 +42,35 @@ def getQueries():
 
 def selectQuery(query):
 	global cur
-	cur.execute(query)
-	columnList = [description[0] for description in cur.description]
-	queryResult = PrettyTable(columnList)
-	rows = cur.fetchall()
-	count = (len(rows))
-	rd = 0
-	result = []
-	while rd < len(columnList):
-		result.append('i['+str(rd)+']')
-		rd+=1
-	#print(result)
-	for i in rows:				
-		finalResult =  ','.join(result)
-		x = len(result) 
-		if x < 2:
-			queryResult.add_row([eval(finalResult)]) 
+	try:
+		cur.execute(query)
+		columnList = [description[0] for description in cur.description]
+		queryResult = PrettyTable(columnList)
+		rows = cur.fetchall()
+		count = (len(rows))
+		rd = 0
+		result = []
+		while rd < len(columnList):
+			result.append('i['+str(rd)+']')
+			rd+=1
+		#print(result)
+		for i in rows:				
+			finalResult =  ','.join(result)
+			x = len(result) 
+			if x < 2:
+				queryResult.add_row([eval(finalResult)]) 
+			else:
+				queryResult.add_row(eval(finalResult))
+		print('Total Number of Row(s) Affected: ', count)
+		print(queryResult)
+	except TypeError:
+		osType = platform.system()
+		con.commit()
+		if osType == "Linux":
+			os.system("clear")
 		else:
-			queryResult.add_row(eval(finalResult))
-	print('Total Number of Row(s) Affected: ', count)
-	print(queryResult)
+			os.system("cls")
+		getTableList()
 
 getTableList()
 getQueries()
