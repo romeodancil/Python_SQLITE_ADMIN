@@ -66,7 +66,7 @@ def selectQuery(query):
 	except TypeError:
 		osType = platform.system()
 		con.commit()
-		if osType != "windows":
+		if osType != "Windows":
 			os.system("clear")
 		else:
 			os.system("cls")
