@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sqlite3 as liteDb
+import sqlite3 as SqliteDb
 import sys
 import platform
 import os
@@ -12,14 +12,14 @@ class SqliteAdmin:
 
 	def __init__(self):
 		if (len(sys.argv) > 1):
-			SqliteAdmin.con = liteDb.connect(sys.argv[1])
+			SqliteAdmin.con = SqliteDb.connect(sys.argv[1])
 		else:
-			SqliteAdmin.con = liteDb.connect("example.db")
+			SqliteAdmin.con = SqliteDb.connect("example.db")
 		self.getTableList()
 		self.getQueries()	
 
 	def getTableList(self):
-		SqliteAdmin.con.row_factory = liteDb.Row
+		SqliteAdmin.con.row_factory = SqliteDb.Row
 		SqliteAdmin.cur = SqliteAdmin.con.cursor()
 		SqliteAdmin.cur.execute("Select name FROM sqlite_master Where type='table';")
 		rows = SqliteAdmin.cur.fetchall()
@@ -37,11 +37,11 @@ class SqliteAdmin:
 			try:
 				query = input("Query> :")
 				if query != "":
-					self.selectQuery(query)
-			except liteDb.OperationalError:
+					self.executeQuery(query)
+			except SqliteDb.OperationalError:
 				print('Oops invalid query Please try it again')
 
-	def selectQuery(self,query):
+	def executeQuery(self,query):
 		global cur
 		try:
 			SqliteAdmin.cur.execute(query)
